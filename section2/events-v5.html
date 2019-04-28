@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>
+      {{counter}}
+    </p>
+    <p v-on:mousemove="updateXY">
+      Mouse: {{x}}  {{y}}
+      <span v-on:mousemove.stop.prevent>Stop here</span>
+    </p>
+    <button v-on:click="sum(5, $event)">Sum 1</button>
+    <a href="https://www.google.com/" v-on:click.prevent="noNavigation" >Google</a>
+    <hr>
+    <input type="text" v-on:keyup.enter.alt = "showAlert" >
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        counter: 0,
+        x: 0,
+        y: 0
+      },
+      methods:{
+        sum(step, ev){
+          console.log(ev);
+          this.counter += step;
+        },
+        updateXY(event){
+          this.x = event.clientX;
+          this.y = event.clientY;
+        },
+        noNavigation(event){
+          event.preventDefault();
+        },
+        showAlert(event){
+          alert("I'm alerting you");
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
